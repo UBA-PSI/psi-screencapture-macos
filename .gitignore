@@ -2,6 +2,7 @@
 /screenrec
 /screenrec-arm64
 /screenrec-x86_64
+/screenrec-*.zip
 
 # recordings and their sidecar files
 *.mov

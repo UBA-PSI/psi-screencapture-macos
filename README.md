@@ -7,13 +7,19 @@
 - If a display is plugged in or unplugged, or a capture stream fails, the affected file is finalized and a new one begins. The recording does not stop.
 - A single Swift file without dependencies. It uses ScreenCaptureKit and runs on macOS 13 and later, on Apple Silicon and Intel.
 
+## Install
+
+Download the zip file from the [latest release](https://github.com/UBA-PSI/psi-screencapture-macos/releases/latest) and unpack it. It contains the universal binary `screenrec` (arm64 and x86_64, macOS 13 and later), signed with a Developer ID and notarized by Apple.
+
 ## Build
 
 ```
 ./build.sh
 ```
 
-This needs `swiftc` from the Xcode Command Line Tools (`xcode-select --install`). The result is the universal binary `screenrec` (arm64 and x86_64, deployment target macOS 13). You can copy the binary to another Mac.
+This needs `swiftc` from the Xcode Command Line Tools (`xcode-select --install`). The result is the same universal binary with an ad-hoc signature. You can copy it to another Mac.
+
+`./release.sh VERSION` additionally signs the binary with a Developer ID certificate and submits it to Apple for notarization. The comment at the top of the script lists the environment variables it needs.
 
 ## Usage
 
@@ -132,7 +138,7 @@ The moving content was a test window with 400 random rectangles at 60 Hz, not a 
 
 ### Not tested yet
 
-- Two displays in extended mode, and unplugging or replugging one of them while recording.
+- Unplugging or replugging a display while recording. Recording two displays in extended mode works.
 - Mirroring, and switching between mirroring and extended mode while recording.
 - Sending a single window to the second display (window mirroring).
 - Macs with macOS 13 to 15, and Intel Macs. On Intel the first log line shows whether HEVC or H.264 was chosen.
